@@ -1,9 +1,8 @@
 const {WebSocketServer} = require('ws');
 const {TicTacToe} = require('./util/tic-tac-toe');
 
-// let game = new TicTacToe();
-// let result = game.makeMove(-1,0,2);
-
+let game = new TicTacToe();
+let clients = [];
 let nextId = 0;
 let port = 8080;
 const wss = new WebSocketServer({ port }, ()=>{
@@ -11,50 +10,60 @@ const wss = new WebSocketServer({ port }, ()=>{
 });
 
 wss.on('connection', (webSocket) => {
-    console.log('A client has connected!');
-    webSocket.on('message', (event) =>{
-        console.log(event.toString());
+    let client = handleConnection(webSocket);
+    webSocket.on('message', (msg) => {
+        console.log("Receiving message from client " + client.id);
+        let data = JSON.parse(msg);
+
+        if(data.memo == "do_move"){
+            game.makeMove(data.row, data.col, client.role);
+            for(let i = 0; i < clients.length; i++){
+                clients[i].webSocket.send(game.getJSON());
+            }
+        }
     });
 });
 
+function handleConnection(webSocket){
+    // create new client object containing client's webSocket, ID, and role
+    let client = objectifySocket(webSocket);
+    console.log("A client has connected. Client ID is: " + client.id);
 
-// wss.on('connection', handleConnection);
+    // need to designate client as player 1, 2, or spectator
+    if(clients.length == 0){
+        client.role = 1;
+    }
+    else if(clients.length == 1){
+        client.role = 2;
+    }
+    else{
+        client.role = -1;
+    }
 
-// function handleConnection(ws){
-//     let client = createSocketObj(ws);
+    // need to save client object to list of clients
+    clients.push(client);
 
-//     if(clients.length == 0){
-//         client.role = Math.floor(Math.random() * 2) + 1;
-//     }
-//     else if(clients.length == 1){
-//         client.role = 3 - clients[0].role;
-//     }
-//     else{
-//         client.role = -1;
-//     }
+    // assign client a role
+    webSocket.send(JSON.stringify({
+        memo: "describe_role",
+        data: {
+            role: client.role
+        }
+    }));
 
-//     clients.push(client);
-//     ws.on('message', (message) => handleMessage(client, message));
-//     ws.send(JSON.stringify({
-//         memo: "describe_role",
-//         data: client.role
-//     }));
+    // send JSON of game to client
+    webSocket.send(game.getJSON());
+    webSocket.on('message', (event) =>{
+        console.log(event.toString());
+    });
 
-//     if(clients.length == 2){
-//         notifyUsersOfState();
-//     }
-// }
+    return client;
+}
 
-// function handleMessage(client, message){
-//     if(obj.memo === "chat_message"){
-//         broadcastChatMessage(client.id, obj.data.text);
-//     }
-// }
-
-// function createSocketObj(ws)
-// {
-//     return {
-//         ws: ws, 
-//         id: nextId++
-//     };
-// }
+function objectifySocket(webSocket){
+    return {
+        webSocket,
+        id: nextId++,
+        role: undefined
+    }
+}

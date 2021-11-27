@@ -19,9 +19,23 @@ class TicTacToe{
         }
         this.board[row][col] = player;
         this.currentPlayer = 3 - player; // switch player
+        this.turnCount++;
 
         this.gameState = determineGameState(this.board, this.turnCount);
         return this.gameState;
+    }
+
+    getJSON(){
+        let gameData = {
+            memo: "describe_game",
+            data: {
+                board: this.board,
+                currentPlayer: this.currentPlayer,
+                gameState: this.gameState,
+                turnCount: this.turnCount
+            }
+        }
+        return JSON.stringify(gameData);
     }
 }
 
