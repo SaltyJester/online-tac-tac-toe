@@ -1,6 +1,11 @@
 let myCanvas = document.getElementById("myCanvas");
 let ctx = myCanvas.getContext("2d");
 
+let scoreBoard = document.getElementById("score_board");
+let homeSymbol = document.getElementById("home_symbol");
+let awaySymbol = document.getElementById("away_symbol");
+let turn_indicator_p = document.getElementById("turn_indicator");
+
 myCanvas.addEventListener('click', clickHandler);
 
 // ctx.fillRect(100, 100, 100, 100);
@@ -13,11 +18,12 @@ myCanvas.addEventListener('click', clickHandler);
 // 0 represents empty space
 // 1 represents X
 // 2 represents O
-let board = [[0,0,0],[0,0,0],[0,0,0]];
+// let board = [[0,0,0],[0,0,0],[0,0,0]];
+let board = null;
 let currentPlayer = undefined;
 let whoAmI = undefined;
 let gameState = 0; // 0 no winners, 1 player one wins, 2 player two wins, 3 tie
-let turnNum = 0;
+// let turnNum = 0;
 
 drawBoard();
 
@@ -52,6 +58,9 @@ function clickHandler(event){
 }
 
 function drawBoard() {
+    if(board === null)
+        return;
+
     ctx.clearRect(0,0,myCanvas.width,myCanvas.height);
     let cW = myCanvas.width/3;
     let cH = myCanvas.height/3;

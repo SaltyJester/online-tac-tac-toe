@@ -18,12 +18,48 @@ websock.onmessage = function (event) {
     if(obj.memo === "describe_role"){
         console.log("I have been assigned as player " + obj.data);
         whoAmI = obj.data;
+        if(whoAmI === -1)
+        {
+            scoreBoard.style.display = "none"; //
+        }
+        else if(whoAmI === 1)
+        {
+            homeSymbol.innerText = "X";
+            awaySymbol.innerText = "O";
+            // turn_indicator_p.style.color = "LawnGreen";
+            // turn_indicator_p.innerText = "Your Turn";
+        }
+        else if(whoAmI === 2)
+        {
+            homeSymbol.innerText = "O";
+            awaySymbol.innerText = "X";
+            // turn_indicator_p.style.color = "red";
+            // turn_indicator_p.innerText = "Their Turn";
+        }
     }
     else if(obj.memo === "describe_state")
     {
         console.log("Server is notifying me of new state...");
         board = obj.data.board;
         currentPlayer = obj.data.currPlayer;
+
+        if(whoAmI !== 1 && whoAmI !== 2){
+            turn_indicator_p.style.color = "blue";
+
+            if(currentPlayer === 1)
+                turn_indicator_p.innerText = "X's Turn";
+            else
+                turn_indicator_p.innerText = "O's Turn";
+        }
+        else if(currentPlayer === whoAmI){
+            turn_indicator_p.style.color = "LawnGreen";
+            turn_indicator_p.innerText = "Your Turn";
+        }
+        else {
+            turn_indicator_p.style.color = "red";
+            turn_indicator_p.innerText = "Their Turn";
+        }
+
         drawBoard();
     }
     else if(obj.memo === "chat_message")

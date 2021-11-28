@@ -1,3 +1,49 @@
 canvas{
     border: solid black;
+    
+    /* Centers the canvas horizontally*/
+    /* padding: 0;
+    margin: auto;
+    display: block; */
+}
+
+#content {
+    width: 600;
+    padding: 0;
+    margin: auto;
+    display: block;
+}
+
+p {
+    font-size: 40px;
+}
+
+.left {
+    text-align: left;
+    width:49%;
+    display: inline-block;
+
+    margin-bottom: 0;
+}
+
+.right {
+    text-align: right;
+    width:50%;
+    display: inline-block;
+
+    margin-bottom: 0;
+}
+
+.middle {
+    text-align: center;
+
+    padding-top: 0;
+}
+
+div #turn_indicator {
+    margin-top: 0;
+}
+
+#turn_indicator {
+    color: gold;
 }

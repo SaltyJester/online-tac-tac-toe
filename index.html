@@ -5,6 +5,17 @@
         <link href="styles.css" rel="stylesheet">
     </head>
     <body>
-        <canvas id="myCanvas" width="600" height="600"></canvas>
+        <div id="content">
+            <canvas id="myCanvas" width="600" height="600"></canvas>
+            <!-- <p>Home: (<span id="home_symbol"></span>), Away: (<span id="away_symbol"></span>)</p> -->
+
+            <div id="score_board">
+                <p class="left">Home: (<span id="home_symbol"></span>)</p>
+                <p class="right">Away: (<span id="away_symbol"></span>)</p>
+            </div>
+            <div>
+                <p class="middle highlight" id="turn_indicator">Game has not started</p>
+            </div>
+        </div>
     </body>
 </html>

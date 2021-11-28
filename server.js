@@ -34,6 +34,17 @@ function handleConnection(ws)
     if(clients.length == 2){
         notifyUsersOfState();
     }
+    else if(clients.length > 2) {
+        let message = JSON.stringify({
+            memo: "describe_state",
+            data: {
+                board: board,
+                currPlayer: currPlayer
+            }
+        });
+
+        client.ws.send(message);
+    }
 }
 
 function handleMessage(client, message)
