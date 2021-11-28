@@ -23,7 +23,6 @@ let board = null;
 let currentPlayer = undefined;
 let whoAmI = undefined;
 let gameState = 0; // 0 no winners, 1 player one wins, 2 player two wins, 3 tie
-// let turnNum = 0;
 
 drawBoard();
 

@@ -42,8 +42,30 @@ websock.onmessage = function (event) {
         console.log("Server is notifying me of new state...");
         board = obj.data.board;
         currentPlayer = obj.data.currPlayer;
+        gameState = obj.data.gameState;
 
-        if(whoAmI !== 1 && whoAmI !== 2){
+        if(gameState !== 0) {
+            
+
+            if(gameState === 3) {
+                turn_indicator_p.innerText = "It's a tie!";
+            }
+            else if(whoAmI !== 1 && whoAmI !== 2) {
+                if(gameState === 1){
+                    turn_indicator_p.innerText = "Winner is X!";
+                }
+                else{
+                    turn_indicator_p.innerText = "Winner is O!";
+                }
+            }
+            else if(whoAmI === gameState){
+                turn_indicator_p.innerText = "You Won!";
+            }
+            else {
+                turn_indicator_p.innerText = "You Lost!";
+            }
+        }
+        else if(whoAmI !== 1 && whoAmI !== 2){
             turn_indicator_p.style.color = "blue";
 
             if(currentPlayer === 1)
