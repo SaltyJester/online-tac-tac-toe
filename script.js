@@ -5,8 +5,11 @@ let scoreBoard = document.getElementById("score_board");
 let homeSymbol = document.getElementById("home_symbol");
 let awaySymbol = document.getElementById("away_symbol");
 let turn_indicator_p = document.getElementById("turn_indicator");
+let chatInput = document.getElementById("chatInput");
 
 myCanvas.addEventListener('click', clickHandler);
+chatInput.addEventListener('keyup', handleChatInput);
+
 
 // ctx.fillRect(100, 100, 100, 100);
 
@@ -97,58 +100,15 @@ function drawBoard() {
     }
 }
 
-function determineGameState()
+function updateChatWindow(user_id, text)
 {
-    let result = 0;
-
-    // Checking each of the rows
-    if( (result = checkLine(0, 0, 0, 1, 3)) != 0) { return result; }
-    if( (result = checkLine(1, 0, 0, 1, 3)) != 0) { return result; }
-    if( (result = checkLine(2, 0, 0, 1, 3)) != 0) { return result; }
-    
-    // Checking each of the cols
-    if( (result = checkLine(0, 0, 1, 0, 3)) != 0) { return result; }
-    if( (result = checkLine(0, 1, 1, 0, 3)) != 0) { return result; }
-    if( (result = checkLine(0, 2, 1, 0, 3)) != 0) { return result; }
-
-    // Checking each of the diagonals
-    if( (result = checkLine(0, 0, 1, 1, 3)) != 0) { return result; }
-    if( (result = checkLine(0, 2, 1, -1, 3)) != 0) { return result; }
-
-    if(turnNum == 9)
-        return 3;
-        
-    return 0;
+    let chatWindow = document.getElementById("chatWindow");
+    chatWindow.value += "\n" + user_id + ": " + text;
 }
 
-// 0 -> no winner in this line
-// 1 -> player one wins this line
-// 2 -> player two wins this line
-function checkLine(sr, sc, dr, dc, len)
-{
-    let val = board[sr][sc];
-    for(let i = 1; i < len; i++)
-    {
-        if(board[sr + dr*i][sc + dc*i] != val)
-            return 0;
+function handleChatInput(evt){
+    if(evt.keyCode == 13){
+        sendChatMessage(evt.target.value);
+        evt.target.value = "";
     }
-
-    return val;
-}
-
-function announceResult()
-{
-    let announcement = document.createElement("p");
-    let str = "This is new.";
-
-    if(gameState != 3){
-        str = "Player " + gameState + " has won!"
-    }
-    else{
-        str = "Game ended in a tie!"
-    }
-
-    const node = document.createTextNode(str);
-    announcement.appendChild(node);
-    document.body.appendChild(announcement);
 }

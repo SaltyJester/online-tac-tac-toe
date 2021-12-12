@@ -114,8 +114,7 @@ function broadcastChatMessage(user_id, text)
     });
 
     for(let i = 0; i < clients.length; i++)
-        if(clients[i].id != user_id)
-            clients[i].ws.send(message);
+        clients[i].ws.send(message);
 }
 
 function createSocketObj(ws)

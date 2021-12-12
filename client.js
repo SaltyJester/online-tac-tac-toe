@@ -87,6 +87,7 @@ websock.onmessage = function (event) {
     else if(obj.memo === "chat_message")
     {
         console.log("User with id: " + obj.data.user_id + " said: \"" + obj.data.text + "\"");
+        updateChatWindow(obj.data.user_id, obj.data.text);
     }
 };
 
