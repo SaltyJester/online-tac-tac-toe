@@ -1,0 +1,66 @@
+canvas{
+    border: solid black;
+    
+    /* Centers the canvas horizontally*/
+    /* padding: 0;
+    margin: auto;
+    display: block; */
+}
+
+#gameStuff {
+    width: 600;
+    padding: 0;
+    /* margin: auto; */
+    margin-left: 30%;
+    margin-right: 0;
+    display: inline-block;
+}
+
+p {
+    font-size: 40px;
+}
+
+.left {
+    text-align: left;
+    width:49%;
+    display: inline-block;
+
+    margin-bottom: 0;
+}
+
+.right {
+    text-align: right;
+    width:50%;
+    display: inline-block;
+
+    margin-bottom: 0;
+}
+
+.middle {
+    text-align: center;
+
+    padding-top: 0;
+}
+
+div #turn_indicator {
+    margin-top: 0;
+}
+
+#turn_indicator {
+    color: gold;
+}
+
+/* #gameStuff {
+    display: inline-block;
+    width: 600;
+} */
+
+#chatStuff {
+    display: inline-block;
+    width: 10%;
+    margin-left: 2.5%;
+
+    position: relative;
+
+    vertical-align: top;
+}
