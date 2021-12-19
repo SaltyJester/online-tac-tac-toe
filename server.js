@@ -69,8 +69,8 @@ function handleMessage(client, message)
         }
         board[obj.data.row][obj.data.col] = client.role;
         currPlayer = 3 - currPlayer;
-        gameState = determineGameState();
         turnNum++;
+        gameState = determineGameState();
         notifyUsersOfState();
     }
     else if(obj.memo === "chat_message")

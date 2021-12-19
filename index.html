@@ -1,29 +1,36 @@
 <html>
     <head>
-        <script src="script.js" type="text/javascript" defer></script>
-        <script src="client.js" type="text/javascript" defer></script>
-        <link href="styles.css" rel="stylesheet">
-    </head>
-    <body>
-        <div id="content">
-            <div id="gameStuff">
-                <canvas id="myCanvas" width="600" height="600"></canvas>
-                <!-- <p>Home: (<span id="home_symbol"></span>), Away: (<span id="away_symbol"></span>)</p> -->
-    
-                <div id="score_board">
-                    <p class="left">Home: (<span id="home_symbol"></span>)</p>
-                    <p class="right">Away: (<span id="away_symbol"></span>)</p>
-                </div>
-                <div>
-                    <p class="middle highlight" id="turn_indicator">Game has not started</p>
-                </div>
-            </div>
+        <style>
+            td, th {
+                min-width: 150px;
+                text-align: center;
+            }
 
-            <div id="chatStuff">
-                <textarea id="chatWindow" rows="20" cols="40" style="resize: none;" disabled></textarea>
-                <br>
-                <input id="chatInput" type="text" style="margin-top: 2vh" size="40">
-            </div>
-        </div>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
+
+        <script src="lobbies.js" type="text/javascript" defer></script>
+    </head>
+
+    <body>
+        <button>Create Lobby</button>
+        <input id="lobbyName" type="text" placeholder="Enter Name">
+        <br>
+        <br>
+        <table id="lobbyTable">
+            <tr>
+                <th>Lobby Name</th>
+                <th>Lobby ID</th>
+                <th>Participants</th>
+            </tr>
+            <tr>
+                <td><a href="https://www.google.com">Game</a></td>
+                <td>1</td>
+                <td>2/2 + 5</td>
+            </tr>
+        </table>
     </body>
 </html>

@@ -49,6 +49,7 @@ websock.onmessage = function (event) {
 
             if(gameState === 3) {
                 turn_indicator_p.innerText = "It's a tie!";
+                turn_indicator_p.style.color = "purple";
             }
             else if(whoAmI !== 1 && whoAmI !== 2) {
                 if(gameState === 1){

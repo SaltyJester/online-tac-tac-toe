@@ -1,0 +1,45 @@
+You can create an input filed using input tags, and you add an ID attribute, set the type to
+text for a text input field.
+    <input id="my_input_id" type="text">
+
+You can grab the element by ID with 
+    let myElem = document.getElementByID("my_input_id");
+
+Once you grab it you can add an event lister to myElem. If you want a specific keystroke input to trigger
+For example, the enter keystroke
+    myElem.addEventListener("keyup", (e)=> {
+        if(e.keyCode == 13){
+            console.log("enter was pressed")
+        }
+    })
+
+You can get what's in the input field by accesing value field of the element e.g.
+    myElem.value
+
+If you want to change what's in the input field by 
+    myElem.value = "new string"
+
+We can apply the above note for instance to clear the input field like so:
+    myElem.value = ""
+
+Another attribute you can add to the input text field is a placeholder value e.g. ...
+    <input placeholder="type stuff here...">
+
+We can use a text area as a chat window (might be limiting for now, but a good start)
+Example:
+    <textarea id="chatWindow" style="resize: none;" rows="15" cols="50" disabled></textarea>
+
+We can access it the same we accessed input element, it just has extra bells and whistles.
+
+Extra things we can do:
+    * We can disable resize and enter text
+    * Set the size with rows and cols
+    * We can have text on different lines by using newline characters.
+
+-----------------------------------------------------------------------------------------------
+
+The entry point where we receive a chat message at the moment is in client.js where we have
+    else if(obj.memo === "chat_message")
+
+The output point where we can send a chat message is in client.js as well, with the sendChatMessage
+function.
