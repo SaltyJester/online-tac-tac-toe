@@ -1,7 +1,11 @@
 let websock = new WebSocket("ws://localhost:8080");
+let url = window.location.href;
+let lobbyId = parseInt(url.substring(url.lastIndexOf('/') + 1));
+console.log("The lobbyId is: " + lobbyId);
 
 websock.onopen = function (event) {
     // websock.send("Some test message from the client");
+    registerIntoLobby();
 };
 
 websock.onmessage = function (event) {
@@ -92,6 +96,7 @@ function setBoardCell(row, col, value)
 {
     // board[row][col] = value;
     let message = {
+        lobbyId,
         memo: "do_move",
         data: {
             row: row,
@@ -106,10 +111,21 @@ function setBoardCell(row, col, value)
 function sendChatMessage(text)
 {
     let message = {
+        lobbyId,
         memo: "chat_message",
         data: {
             text: text
         }
+    };
+
+    websock.send(JSON.stringify(message));
+}
+
+function registerIntoLobby()
+{
+    let message = {
+        lobbyId,
+        memo: "register_into_lobby"
     };
 
     websock.send(JSON.stringify(message));
