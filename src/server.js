@@ -69,6 +69,7 @@ app.get('/list_lobbies', (req, res) => {
         });
     }
 
+    res.set("Access-Control-Allow-Origin","*"); // Note: Can remove this if not hosting through localhost
     res.json(result);
 });
 

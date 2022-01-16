@@ -12,11 +12,12 @@
             }
         </style>
 
-        <script src="lobbies.js" type="text/javascript" defer></script>
+        <script src="/public/lobbies.js" type="text/javascript" defer></script>
     </head>
 
-    <body>
+    <body onload="refreshLobbies()">
         <button>Create Lobby</button>
+        <button onclick="refreshLobbies()">Refresh Lobbies</button>
         <input id="lobbyName" type="text" placeholder="Enter Name">
         <br>
         <br>
@@ -26,11 +27,13 @@
                 <th>Lobby ID</th>
                 <th># of Participants</th>
             </tr>
-            <tr>
-                <td><a href="https://www.google.com">Game</a></td>
-                <td>1</td>
-                <td>2/2 + 5</td>
-            </tr>
+            <template id="lobbyEntry" class="refreshable">
+                <tr>
+                    <td><a href="https://www.google.com">Game</a></td>
+                    <td>1</td>
+                    <td>2/2 + 5</td>
+                </tr>
+            </template>
         </table>
     </body>
 </html>
