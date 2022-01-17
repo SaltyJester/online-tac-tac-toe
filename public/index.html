@@ -16,9 +16,11 @@
     </head>
 
     <body onload="refreshLobbies()">
-        <button>Create Lobby</button>
+        <button onclick="createLobby()">Create Lobby</button>
+        <input id="lobbyNameField" type="text" placeholder="Enter Name">
+        <br>
+        <br>
         <button onclick="refreshLobbies()">Refresh Lobbies</button>
-        <input id="lobbyName" type="text" placeholder="Enter Name">
         <br>
         <br>
         <table id="lobbyTable">
