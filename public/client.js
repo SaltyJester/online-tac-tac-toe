@@ -1,4 +1,4 @@
-let websock = new WebSocket("ws://localhost:8080");
+let websock = new WebSocket(window.location.href.replace("http://", "ws://"));
 let url = window.location.href;
 let lobbyId = parseInt(url.substring(url.lastIndexOf('/') + 1));
 console.log("The lobbyId is: " + lobbyId);

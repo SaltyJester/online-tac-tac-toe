@@ -15,7 +15,7 @@ const app = express(express.static('public'));
 app.use(express.json());
 const wss = new WebSocketServer({noServer: true});
 
-const server = app.listen(8080);
+const server = app.listen(80);
 
 // Websocket book-keeping
 let lobbies = {};
